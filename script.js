@@ -108,6 +108,11 @@ function setupEventListeners() {
     if (elements.giftBtn) {
         elements.giftBtn.addEventListener('click', showFinalAnimation);
     }
+
+    const restartBtn = document.getElementById('restart-btn');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', restartExperience);
+    }
 }
 
 // ===================================
@@ -478,6 +483,31 @@ function switchPhase(phaseNumber) {
         targetPhase.classList.add('active');
         state.currentPhase = phaseNumber;
     }
+}
+
+function restartExperience() {
+    // Reset state variables
+    state.recipientName = '';
+    state.meaning = '';
+    state.symbol = '';
+
+    // Reset inputs and selections
+    if (elements.recipientInput) elements.recipientInput.value = '';
+    document.querySelectorAll('.icon-option').forEach(opt => opt.classList.remove('selected'));
+    if (elements.continueBtn) elements.continueBtn.disabled = true;
+
+    // Clear animations and fireworks
+    if (elements.animationContainer) elements.animationContainer.innerHTML = '';
+    if (elements.fireworksContainer) elements.fireworksContainer.innerHTML = '';
+
+    // Stop music
+    if (typeof audioManager !== 'undefined') audioManager.pause();
+
+    // Go to first phase
+    switchPhase(1);
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===================================

@@ -336,6 +336,32 @@ body {
     }
 }
 
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--color-secondary-light);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    text-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+}
+
+.input-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.1rem;
+    color: var(--color-cream);
+    font-weight: 500;
+}
+
+.card-style {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+}
+
 .floating-label,
 .section-label {
     font-size: 1.1rem;
@@ -345,21 +371,26 @@ body {
 }
 
 .elegant-input {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: 1rem;
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: 1.1rem;
     font-family: var(--font-body);
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     color: var(--color-white);
-    transition: var(--transition-fast);
+    transition: all var(--transition-fast);
+}
+
+.elegant-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .elegant-input:focus {
     outline: none;
     border-color: var(--color-secondary);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
 }
 
 .icon-grid {
@@ -395,9 +426,17 @@ body {
 }
 
 .icon-option.selected {
-    background: rgba(245, 158, 11, 0.2);
+    background: rgba(245, 158, 11, 0.3);
     border-color: var(--color-secondary);
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 35px rgba(245, 158, 11, 0.6);
+}
+
+.icon-option .label {
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
 }
 
 .icon {
@@ -1327,94 +1366,123 @@ body {
         transform: translateX(-50%) scale(1.05);
     }
 }
-/* Final Controls Buttons */
+
+/* Final Greeting Title */
+.final-greeting {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    color: #FFFFFF;
+    text-shadow:
+        1px 1px 0px #F59E0B,
+        2px 2px 0px #D97706,
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(245, 158, 11, 0.6),
+        0 0 60px rgba(185, 28, 28, 0.4);
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    animation: greeting-grand-pop 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.2) both;
+    pointer-events: none;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+@keyframes greeting-grand-pop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.3) rotate(-5deg);
+        filter: blur(10px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1) rotate(2deg);
+        filter: blur(0px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+/* Footer Visibility Fix */
+.dev-footer {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 5;
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        padding-bottom: 300px;
+        /* Space for footer not to overlap */
+        overflow-y: visible;
+    }
+
+    .cta-button,
+    .gift-button {
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 20;
+    }
+
+    .phase {
+        overflow-y: auto !important;
+        /* Allow scrolling on mobile */
+        align-items: flex-start !important;
+        padding: 20px 0;
+    }
+}
+
+/* New Restart Button Style */
 .final-controls {
     position: fixed;
     top: 20px;
     right: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 1000;
+    z-index: 2000;
 }
 
-.control-btn {
-    padding: 12px 24px;
-    background: rgba(15, 23, 42, 0.9);
+.restart-btn-v2 {
+    padding: 12px 20px;
+    background: rgba(185, 28, 28, 0.8);
     backdrop-filter: blur(10px);
-    border: 2px solid var(--color-secondary-light);
-    border-radius: 12px;
-    color: var(--color-cream);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
+    border: 2px solid white;
+    border-radius: 30px;
+    color: white;
+    font-family: var(--font-body);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(252, 211, 77, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.control-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(252, 211, 77, 0.4);
-    background: rgba(15, 23, 42, 1);
-    border-color: var(--color-secondary);
-}
-
-.control-btn:active {
-    transform: translateY(0);
-}
-
-.restart-btn:hover {
-    border-color: #3B82F6;
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-}
-
-.capture-btn:hover {
-    border-color: #EC4899;
-    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+.restart-btn-v2:hover {
+    background: var(--color-primary);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(185, 28, 28, 0.5);
 }
 
 @media (max-width: 768px) {
     .final-controls {
         top: 10px;
         right: 10px;
-        flex-direction: column;
-        gap: 8px;
     }
-    
-    .control-btn {
-        padding: 10px 16px;
+
+    .restart-btn-v2 {
+        padding: 10px 15px;
         font-size: 0.85rem;
-    }
-}
-
-/* Final Greeting Title */
-.final-greeting {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 8vw, 4.5rem);
-    color: var(--color-secondary-light);
-    text-shadow: 0 0 20px rgba(252, 211, 77, 0.6), 0 0 40px rgba(220, 38, 38, 0.3);
-    z-index: 100;
-    margin: 0;
-    padding: 0;
-    animation: greeting-pop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-    pointer-events: none;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-@keyframes greeting-pop {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -40%) scale(0.5);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
     }
 }
