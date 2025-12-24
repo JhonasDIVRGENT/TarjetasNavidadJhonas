@@ -1426,24 +1426,93 @@ body {
 }
 
 @media (max-width: 768px) {
-    .content-container {
-        padding-bottom: 300px;
-        /* Space for footer not to overlap */
-        overflow-y: visible;
-    }
 
-    .cta-button,
-    .gift-button {
-        margin-bottom: 20px;
+    /* Mobile Layout Fix: No more floating navbar/footer over content */
+    body {
+        overflow-x: hidden;
+        overflow-y: auto !important;
+        display: block !important;
         position: relative;
-        z-index: 20;
     }
 
     .phase {
-        overflow-y: auto !important;
-        /* Allow scrolling on mobile */
-        align-items: flex-start !important;
-        padding: 20px 0;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh;
+        display: none !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        /* Centered instead of flex-start */
+        align-items: center !important;
+        padding: 40px 20px !important;
+        /* Balanced padding */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease;
+        z-index: 10;
+        box-sizing: border-box;
+    }
+
+    .phase.active {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .content-container {
+        padding: var(--spacing-md) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 40px !important;
+        box-shadow: none !important;
+        background: rgba(15, 23, 42, 0.8) !important;
+    }
+
+    .dev-footer {
+        position: relative !important;
+        margin: 40px 0 20px 0 !important;
+        padding: 20px !important;
+        background: transparent !important;
+        z-index: 5;
+        border-top: none !important;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Prevent common mobile issues */
+    .section-title {
+        font-size: 1.8rem !important;
+        margin-top: 20px;
+    }
+
+    .icon-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .icon-option {
+        min-height: 100px !important;
+        padding: 10px !important;
+    }
+
+    .card-closed {
+        transform: scale(0.9);
+    }
+
+    .animation-container {
+        height: 70vh !important;
+        /* Force height so absolute children center correctly */
+        width: 100%;
+        position: relative;
+    }
+
+    .music-control {
+        bottom: 20px;
+        left: 20px;
+        z-index: 2001;
     }
 }
 
@@ -1484,12 +1553,18 @@ body {
 
 @media (max-width: 768px) {
     .final-controls {
-        bottom: 20px;
-        right: 20px;
+        bottom: 30px;
+        right: 15px;
+        z-index: 2200;
     }
 
     .restart-btn-v2 {
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 0.75rem;
+        background: #B91C1C;
+        border: 2px solid white;
+        border-radius: 8px;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 }

@@ -482,6 +482,7 @@ function switchPhase(phaseNumber) {
     if (targetPhase) {
         targetPhase.classList.add('active');
         state.currentPhase = phaseNumber;
+        window.scrollTo(0, 0); // Always reset scroll to top for new phase
     }
 }
 
