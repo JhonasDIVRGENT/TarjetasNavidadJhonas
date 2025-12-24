@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Una tarjeta navideña interactiva y personalizada">
+    <title>Tarjeta Navideña Interactiva by Jhonas</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=9">
+
+    <!-- Howler.js for audio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+</head>
+
+<body>
+    <!-- Background particles container -->
+    <div id="particles-container"></div>
+    <div class="snowflakes" aria-hidden="true"></div>
+
+    <!-- Phase 1: Closed Card -->
+    <section id="phase-1" class="phase active">
+        <div class="card-container">
+            <div id="card-closed" class="card-closed">
+                <svg viewBox="0 0 400 300" class="card-svg">
+                    <!-- Envelope back -->
+                    <rect x="50" y="80" width="300" height="200" rx="10" fill="#B91C1C" class="envelope-back" />
+                    <!-- Decorative elements -->
+                    <circle cx="200" cy="180" r="40" fill="#DC2626" opacity="0.3" class="glow-circle" />
+                    <!-- Envelope flap -->
+                    <path d="M 50 80 L 200 180 L 350 80 Z" fill="#991B1B" class="envelope-flap" />
+                    <!-- Stars decoration -->
+                    <g class="star-group">
+                        <polygon
+                            points="200,120 205,130 215,130 207,137 210,147 200,140 190,147 193,137 185,130 195,130"
+                            fill="#FCD34D" class="twinkle-star" />
+                        <polygon
+                            points="120,140 123,145 128,145 124,149 126,154 120,150 114,154 116,149 112,145 117,145"
+                            fill="#FCD34D" class="twinkle-star delay-1" />
+                        <polygon
+                            points="280,140 283,145 288,145 284,149 286,154 280,150 274,154 276,149 272,145 277,145"
+                            fill="#FCD34D" class="twinkle-star delay-2" />
+                    </g>
+                    <!-- Seal -->
+                    <circle cx="200" cy="180" r="25" fill="#F59E0B" class="seal" />
+                    <text x="200" y="188" font-size="20" text-anchor="middle" fill="#fff" font-family="serif">✨</text>
+                </svg>
+                <div class="card-instruction">
+                    <p class="pulse-text">Haz clic para abrir la tarjeta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 2: User Inputs -->
+    <section id="phase-2" class="phase">
+        <div class="content-container card-style">
+            <h2 class="section-title">Personaliza tu tarjeta</h2>
+
+            <!-- Name Input -->
+            <div class="input-group">
+                <label for="recipient-name" class="input-label">¿Para quién es esta tarjeta?</label>
+                <input type="text" id="recipient-name" class="elegant-input" placeholder="Escribe el nombre aquí..."
+                    maxlength="50">
+            </div>
+
+            <!-- Meaning Selection -->
+            <div class="input-group" id="input-meaning">
+                <label class="input-label">¿Qué significa la Navidad para ti?</label>
+                <div class="icon-grid">
+                    <button class="icon-option" data-value="unión">
+                        <span class="icon" id="icon-union">👨‍👩‍👧‍👦</span>
+                        <span class="label">Unión</span>
+                    </button>
+                    <button class="icon-option" data-value="amor">
+                        <span class="icon" id="icon-love">❤️</span>
+                        <span class="label">Amor</span>
+                    </button>
+                    <button class="icon-option" data-value="alegría">
+                        <span class="icon" id="icon-joy">😊</span>
+                        <span class="label">Alegría</span>
+                    </button>
+                    <button class="icon-option" data-value="paz">
+                        <span class="icon" id="icon-peace">☮️</span>
+                        <span class="label">Paz</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Symbol Selection -->
+            <div class="input-group" id="input-symbol">
+                <label class="input-label">Elige tu símbolo navideño</label>
+                <div class="icon-grid">
+                    <button class="icon-option" data-value="tree">
+                        <span class="icon" id="icon-tree">🎄</span>
+                        <span class="label">Árbol</span>
+                    </button>
+                    <button class="icon-option" data-value="santa">
+                        <span class="icon" id="icon-santa">🎅</span>
+                        <span class="label">Papá Noel</span>
+                    </button>
+                    <button class="icon-option" data-value="star">
+                        <span class="icon" id="icon-star">⭐</span>
+                        <span class="label">Estrella</span>
+                    </button>
+                </div>
+            </div>
+
+            <button id="continue-btn" class="cta-button" disabled>
+                Continuar →
+            </button>
+        </div>
+    </section>
+
+    <!-- Phase 3: Personalized Message -->
+    <section id="phase-3" class="phase">
+        <div class="content-container center card-style">
+            <div class="letter-container">
+                <div class="letter-header">
+                    <div class="letter-symbol" id="letter-symbol"></div>
+                    <div class="letter-date">Navidad 2024</div>
+                </div>
+                <div class="letter-body">
+                    <h2 class="letter-greeting" id="message-greeting"></h2>
+                    <p class="letter-content" id="message-content"></p>
+                </div>
+            </div>
+            <div class="curiosity-box">
+                <h3 class="curiosity-title">❄️ ¿Sabías que...?</h3>
+                <p id="curiosity-text" class="curiosity-text"></p>
+            </div>
+            <button id="gift-btn" class="gift-button pulse-button">
+                🎁 Abrir regalo sorpresa
+            </button>
+        </div>
+    </section>
+
+    <!-- Phase 4: Final Animation -->
+    <section id="phase-4" class="phase">
+        <div class="animation-container" id="animation-container"></div>
+    </section>
+
+    <div id="fireworks-container"></div>
+
+    <button id="music-toggle" class="music-control" aria-label="Toggle music">
+        <span class="music-icon">🔊</span>
+    </button>
+
+    <footer class="dev-footer">
+        <p>Desarrollado con ❤️ por <strong>JhonasDev</strong></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/symbols.js?v=10"></script>
+    <script src="js/audio.js?v=10"></script>
+    <script src="js/messageGenerator.js?v=10"></script>
+    <script src="script.js?v=10"></script>
+</body>
+
+</html>
