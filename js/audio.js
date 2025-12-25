@@ -12,9 +12,9 @@ class AudioManager {
     init() {
         if (this.initialized) return;
 
-        // Villancico navideño - Usando archivo local NavidadAudio.mp3
+        // Villancico navideño - Usando archivo local Navidad.mp3
         this.backgroundMusic = new Howl({
-            src: ['assets/NavidadAudio.mp3'],
+            src: ['assets/Navidad.mp3'],
             loop: true,
             volume: 0.2,
             html5: true,
@@ -22,7 +22,7 @@ class AudioManager {
                 console.log('✅ Villancico navideño cargado correctamente');
             },
             onloaderror: (id, error) => {
-                console.log('❌ Error cargando NavidadAudio.mp3, intentando alternativa online');
+                console.log('❌ Error cargando Navidad.mp3, intentando alternativa online');
                 // Si falla el archivo local, usar Bensound como respaldo
                 this.backgroundMusic = new Howl({
                     src: ['https://www.bensound.com/bensound-music/bensound-christmastime.mp3'],
@@ -33,7 +33,7 @@ class AudioManager {
                         console.log('✅ Música online cargada como alternativa');
                     },
                     onloaderror: () => {
-                        console.log('❌ No se pudo cargar música. Verifica que NavidadAudio.mp3 esté en la carpeta assets/');
+                        console.log('❌ No se pudo cargar música. Verifica que Navidad.mp3 esté en la carpeta assets/');
                     }
                 });
             }
