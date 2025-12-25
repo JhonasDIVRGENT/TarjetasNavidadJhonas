@@ -88,23 +88,24 @@ body {
    Phase Management
    =================================== */
 .phase {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
-    display: flex;
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-medium), visibility var(--transition-medium);
-    z-index: 1;
+    transition: opacity var(--transition-medium);
+    z-index: 10;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .phase.active {
+    display: flex;
     opacity: 1;
-    visibility: visible;
 }
 
 /* ===================================
@@ -1291,18 +1292,15 @@ body {
    Developer Footer
    =================================== */
 .dev-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    padding: var(--spacing-sm);
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    padding: 40px var(--spacing-sm);
+    background: transparent;
     text-align: center;
     font-size: 0.85rem;
     color: var(--color-cream);
-    z-index: 999;
-    border-top: 1px solid rgba(252, 211, 77, 0.2);
+    z-index: 5;
+    margin-top: 20px;
 }
 
 .dev-footer p {
